@@ -1,2 +1,2 @@
 # unite-ale
-a unite.vim plugin for Asynchronous Lint Engine
+a unite.vim plugin for ale(Asynchronous Lint Engine)
