@@ -9,10 +9,15 @@ endfunction
 let s:source = {
       \ 'name' : 'ale',
       \ 'default_kind' : 'jump_list',
+      \ 'hooks' : {},
       \ }
 
+function! s:source.hooks.on_init(args, context) abort
+  let a:context.source__bufnr = bufnr('%')
+endfunction
+
 function! s:source.gather_candidates(args, context) abort
-  return map(deepcopy(ale#engine#GetLoclist(bufnr('%'))), "{
+  return map(deepcopy(ale#engine#GetLoclist(a:context.source__bufnr)), "{
         \ 'word' : v:val.text,
         \ 'abbr' : '[' . v:val.lnum . ':' . v:val.col . '] ' . v:val.text,
         \ 'action__buffer_nr' : v:val.bufnr,
